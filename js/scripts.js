@@ -1,3 +1,4 @@
+//list of pokemon
 let pokemonList = [
   {
     name: "Weedle",
@@ -22,6 +23,16 @@ let pokemonList = [
   },
 ];
 
-for (i = 0; i < pokemonList.length; i++) {
-  document.write(`<div>${pokemonList[i].name}</div>`);
+//shows pokemon name and height each on their own row
+for (let i = 0; i < pokemonList.length; i++) {
+  let statement = "";
+    if(`${pokemonList[i].height}`>=2) {
+      statement = "- Wow, that's big!";
+  } else {
+      statement = "";
+  }
+  document.write(
+    `<div>${pokemonList[i].name} (height: ${pokemonList[i].height}) ${statement}</div>`
+  );
+
 }
