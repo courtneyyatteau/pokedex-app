@@ -1,8 +1,22 @@
-*{
-    margin: 0 auto;
+* {
+  margin: 0 auto;
 }
 
 div {
-    margin: 10px;
-    font-size: x-large;
+  font-size: large;
+}
+
+.pokeball-image {
+  width: 5%;
+  padding: 0 20px;
+}
+
+.pokedex-page {
+  margin: 10px;
+  line-height: 1.4;
+  display: grid;
+}
+
+.title {
+  text-align: center;
 }

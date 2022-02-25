@@ -23,16 +23,17 @@ let pokemonList = [
   },
 ];
 
-//shows pokemon name and height each on their own row
+//loops through the pokemon list
 for (let i = 0; i < pokemonList.length; i++) {
   let statement = "";
-    if(`${pokemonList[i].height}`>=2) {
-      statement = "- Wow, that's big!";
+  //checks if height is at least 2. If so, states it's big!
+  if (`${pokemonList[i].height}` >= 2) {
+    statement = "- Wow, that's big!";
   } else {
-      statement = "";
+    statement = "";
   }
+  //shows pokemon name and height each on their own row
   document.write(
     `<div>${pokemonList[i].name} (height: ${pokemonList[i].height}) ${statement}</div>`
   );
-
 }
