@@ -1,5 +1,5 @@
-//list of pokemon
 let pokemonRepository = (function () {
+  //list of pokemon
   let pokemonList = [
     {
       name: "Weedle",
@@ -24,28 +24,49 @@ let pokemonRepository = (function () {
     },
   ];
 
+  //adds a pokemon to the list
   function add(pokemon) {
     pokemonList.push(pokemon);
   }
 
+  //gets the pokemon list
   function getAll() {
     return pokemonList;
+  }
+
+  //logs pokemon name when clicked
+  function showDetails(pokemon) {
+    console.log(pokemon.name);
+  }
+
+  //adds a click listener when a pokemon button is pressed and shows pokemon name
+  function addListener(button, pokemon) {
+    button.addEventListener("click", function () {
+      showDetails(pokemon);
+    });
+  }
+
+  //creates a button list of pokemon
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
+    addListener(button, pokemon);
   }
 
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
+    showDetails: showDetails,
   };
 })();
 
-//loops through the pokemon list
-let pokemonList = pokemonRepository.getAll();
-pokemonList.forEach(function (pokemon) {
-  //checks if height is at least 2. If so, states it's big!
-  let statement = "";
-  pokemon.height >= 2 ? (statement = "- Wow, that's big!") : (statement = "");
-  //shows pokemon name and height each on their own row
-  document.write(
-    `<div>${pokemon.name} (height: ${pokemon.height}) ${statement}</div>`
-  );
+//actually makes the respository full of pokemon
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
 });
