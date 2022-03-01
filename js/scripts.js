@@ -1,6 +1,7 @@
 let pokemonRepository = (function () {
   let repository = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  let modalContainer = document.querySelector(".modal-container");
 
   //adds a pokemon to the list
   function add(pokemon) {
@@ -15,11 +16,97 @@ let pokemonRepository = (function () {
   //logs pokemon name when clicked
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+      showModal(pokemon);
     });
   }
 
-  //adds a click listener when a pokemon button is pressed and shows pokemon name
+  function properCasing(item) {
+    return item.charAt(0).toUpperCase() + item.slice(1);
+  }
+
+  function showModal(pokemon) {
+    let modalContainer = document.querySelector(".modal-container");
+    modalContainer.innerHTML = "";
+
+    //creates modal
+    let modal = document.createElement("div");
+    modal.classList.add("modal");
+    modalContainer.classList.add("is-visible");
+
+    //creates pokemon name
+    let pokemonName = document.createElement("h1");
+    pName = properCasing(pokemon.name);
+    pokemonName.innerText = pName;
+    pokemonName.classList.add("pokemon-name");
+
+    //creates pokemon image
+    let pokemonImage = document.createElement("img");
+    pokemonImage.src = pokemon.imageUrl;
+    pokemonImage.classList.add("pokemon-image");
+
+    //creates pokemon height
+    let pokemonHeight = document.createElement("p");
+    let pHeightCm = pokemon.height * 10;
+    pokemonHeight.innerText = `Height: ${pHeightCm} cm`;
+    pokemonHeight.classList.add("pokemon-height");
+
+    //creates type(s) of pokemon list
+    let pokemonTypesLocation = document.createElement("p");
+    let pokemonTypes = pokemon.types;
+    let pokemonTypesList = "";
+    if (!pokemonTypes) {
+      pokemonTypesList = "None";
+    } else {
+      let firstType = properCasing(pokemonTypes[0].type.name);
+      pokemonTypesList += `${firstType}`;
+      for (i = 1; i < pokemonTypes.length; i++) {
+        let type = properCasing(pokemonTypes[i].type.name);
+        pokemonTypesList += `, ${type}`;
+      }
+    }
+    let formatType = pokemonTypes.length < 2 ? "Type: " : "Types: ";
+    pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
+    pokemonTypesLocation.classList.add("pokemon-types");
+
+    //close button for modal
+    let closeButtonElement = document.createElement("button");
+    closeButtonElement.classList.add("modal-close");
+    closeButtonElement.innerText = "Close";
+    closeButtonElement.addEventListener("click", hideModal);
+
+    //appends all creations from above
+    modalContainer.appendChild(modal);
+    modal.appendChild(pokemonName);
+    modal.appendChild(pokemonHeight);
+    modal.appendChild(pokemonTypesLocation);
+    modal.appendChild(pokemonImage);
+    modal.appendChild(closeButtonElement);
+    console.log(pokemon);
+  }
+
+  function hideModal() {
+    let modalContainer = document.querySelector(".modal-container");
+    modalContainer.classList.remove("is-visible");
+  }
+
+  //exits modal when clicking outside area
+  modalContainer.addEventListener("click", (e) => {
+    // Since this is also triggered when clicking INSIDE the modal container,
+    // We only want to close if the user clicks directly on the overlay
+    let target = e.target;
+    if (target === modalContainer) {
+      hideModal();
+    }
+  });
+
+  //exits modal when pressing "escape key" and the modal is currently open
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
+      hideModal();
+    }
+  });
+
+  //adds a click listener and when a pokemon button is pressed it shows pokemon name
   function addListener(button, pokemon) {
     button.addEventListener("click", function () {
       showDetails(pokemon);
@@ -31,7 +118,8 @@ let pokemonRepository = (function () {
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
     let button = document.createElement("button");
-    button.innerText = pokemon.name;
+    pokemonName = properCasing(pokemon.name);
+    button.innerText = pokemonName;
     button.classList.add("button-class");
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
