@@ -26,12 +26,10 @@ let pokemonRepository = (function () {
 
   function showModal(pokemon) {
     let modalBody = $(".modal-body");
-    modalBody.empty();
+    let modalTitle = $(".modal-title");
     //creates pokemon name
-    let pokemonName = document.createElement("h1");
-    pName = properCasing(pokemon.name);
-    pokemonName.innerText = pName;
-    pokemonName.classList.add("pokemon-name");
+    let pName = properCasing(pokemon.name);
+    let pokemonName = $("<h2>" + pName + "</h2>");
 
     //creates pokemon image
     let pokemonImage = document.createElement("img");
@@ -39,10 +37,8 @@ let pokemonRepository = (function () {
     pokemonImage.classList.add("pokemon-image");
 
     //creates pokemon height
-    let pokemonHeight = document.createElement("p");
     let pHeightCm = pokemon.height * 10;
-    pokemonHeight.innerText = `Height: ${pHeightCm} cm`;
-    pokemonHeight.classList.add("pokemon-height");
+    let pokemonHeight = $("<p>" + "Height: " + pHeightCm + "cm" + "</p>");
 
     //creates type(s) of pokemon list
     let pokemonTypesLocation = document.createElement("p");
@@ -61,9 +57,10 @@ let pokemonRepository = (function () {
     let formatType = pokemonTypes.length < 2 ? "Type: " : "Types: ";
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
-
+    modalBody.empty();
+    modalTitle.empty();
     //appends all creations from above
-    modalBody.append(pokemonName);
+    modalTitle.append(pokemonName);
     modalBody.append(pokemonHeight);
     modalBody.append(pokemonTypesLocation);
     modalBody.append(pokemonImage);
