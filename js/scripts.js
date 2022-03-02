@@ -25,14 +25,8 @@ let pokemonRepository = (function () {
   }
 
   function showModal(pokemon) {
-    let modalContainer = document.querySelector(".modal-container");
-    modalContainer.innerHTML = "";
-
-    //creates modal
-    let modal = document.createElement("div");
-    modal.classList.add("modal");
-    modalContainer.classList.add("is-visible");
-
+    let modalBody = $(".modal-body");
+    modalBody.empty();
     //creates pokemon name
     let pokemonName = document.createElement("h1");
     pName = properCasing(pokemon.name);
@@ -68,43 +62,12 @@ let pokemonRepository = (function () {
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
 
-    //close button for modal
-    let closeButtonElement = document.createElement("button");
-    closeButtonElement.classList.add("modal-close");
-    closeButtonElement.innerText = "Close";
-    closeButtonElement.addEventListener("click", hideModal);
-
     //appends all creations from above
-    modalContainer.appendChild(modal);
-    modal.appendChild(pokemonName);
-    modal.appendChild(pokemonHeight);
-    modal.appendChild(pokemonTypesLocation);
-    modal.appendChild(pokemonImage);
-    modal.appendChild(closeButtonElement);
-    console.log(pokemon);
+    modalBody.append(pokemonName);
+    modalBody.append(pokemonHeight);
+    modalBody.append(pokemonTypesLocation);
+    modalBody.append(pokemonImage);
   }
-
-  function hideModal() {
-    let modalContainer = document.querySelector(".modal-container");
-    modalContainer.classList.remove("is-visible");
-  }
-
-  //exits modal when clicking outside area
-  modalContainer.addEventListener("click", (e) => {
-    // Since this is also triggered when clicking INSIDE the modal container,
-    // We only want to close if the user clicks directly on the overlay
-    let target = e.target;
-    if (target === modalContainer) {
-      hideModal();
-    }
-  });
-
-  //exits modal when pressing "escape key" and the modal is currently open
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
-      hideModal();
-    }
-  });
 
   //adds a click listener and when a pokemon button is pressed it shows pokemon name
   function addListener(button, pokemon) {
@@ -117,7 +80,11 @@ let pokemonRepository = (function () {
   function addListItem(pokemon) {
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
+    listpokemon.classList.add("group-list-item");
     let button = document.createElement("button");
+    button.classList.add("btn");
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("data-target", "#pokemonModal");
     pokemonName = properCasing(pokemon.name);
     button.innerText = pokemonName;
     button.classList.add("button-class");
@@ -126,29 +93,13 @@ let pokemonRepository = (function () {
     addListener(button, pokemon);
   }
 
-  function showLoadingMessage() {
-    let loadingLocation = document.querySelector(".title");
-    let loadingMessage = document.createElement("p");
-    loadingMessage.classList.add("load-message");
-    loadingMessage.innerHTML = "Loading";
-    loadingLocation.appendChild(loadingMessage);
-  }
-
-  function hideLoadingMessage() {
-    let loadingLocation = document.querySelector(".title");
-    let loadingMessage = document.querySelector(".load-message");
-    loadingLocation.removeChild(loadingMessage);
-  }
-
   function loadList() {
-    showLoadingMessage();
     return fetch(apiUrl)
       .then(function (response) {
         return response.json();
       })
 
       .then(function (json) {
-        hideLoadingMessage();
         json.results.forEach(function (item) {
           let pokemon = {
             name: item.name,
@@ -163,14 +114,12 @@ let pokemonRepository = (function () {
   }
 
   function loadDetails(item) {
-    showLoadingMessage();
     let url = item.detailsUrl;
     return fetch(url)
       .then(function (response) {
         return response.json();
       })
       .then(function (details) {
-        hideLoadingMessage();
         // Now we add the details to the item
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
@@ -188,8 +137,6 @@ let pokemonRepository = (function () {
     showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails,
-    showLoadingMessage: showLoadingMessage,
-    hideLoadingMessage: hideLoadingMessage,
   };
 })();
 
