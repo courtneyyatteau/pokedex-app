@@ -14,17 +14,26 @@
     <title>Simple JS App</title>
   </head>
   <body class="pokedex-page">
-    <h1 class="title">
-      <img
-        class="pokeball-image"
-        src="/img/pokeball.png"
-        alt="pokeball"
-      />Pokemon List<img
-        class="pokeball-image"
-        src="/img/pokeball.png"
-        alt="pokeball"
-      />
-    </h1>
+    <nav class="navbar navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="#">
+        <img
+          src="/img/pokeball.png"
+          width="50%"
+          height="50%"
+          alt="Pokéball logo"
+        />
+      </a>
+      <form class="form-inline">
+        <input
+          class="form-control mr-sm-2"
+          id="search-pokemon"
+          type="search"
+          placeholder="Search Pokemon"
+          aria-label="Search for a Pokemon"
+        />
+      </form>
+    </nav>
+    <h1 class="title">Pokemon List</h1>
     <div
       class="modal fade"
       id="pokemonModal"

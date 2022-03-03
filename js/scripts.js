@@ -84,7 +84,6 @@ let pokemonRepository = (function () {
     button.setAttribute("data-target", "#pokemonModal");
     pokemonName = properCasing(pokemon.name);
     button.innerText = pokemonName;
-    button.classList.add("button-class");
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
     addListener(button, pokemon);
