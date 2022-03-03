@@ -2,8 +2,8 @@ div {
   font-size: large;
 }
 
-.pokemon-list {
-  list-style: none;
+.page-container {
+  margin-top: 80px;
 }
 
 .title {
@@ -16,10 +16,19 @@ div {
 }
 
 .pokemon-list {
-  margin: 30px auto;
+  margin: 0px auto;
   text-align: center;
+  list-style: none;
 }
 
 li {
   margin: 20px;
+}
+
+.pokemon-image {
+  width: 50%;
+}
+
+.form-inline {
+  float: left;
 }

@@ -20,6 +20,18 @@ let pokemonRepository = (function () {
     });
   }
 
+  function findPokemon(searchName) {
+    // Clear the all the buttons on the page when user types in search box
+    $(".pokemon-list").empty();
+
+    // Add pokemon buttons for which the name includes the search string
+    repository.forEach((pokemon) => {
+      if (properCasing(pokemon.name).includes(properCasing(searchName))) {
+        addListItem(pokemon);
+      }
+    });
+  }
+
   function properCasing(item) {
     return item.charAt(0).toUpperCase() + item.slice(1);
   }
@@ -27,6 +39,10 @@ let pokemonRepository = (function () {
   function showModal(pokemon) {
     let modalBody = $(".modal-body");
     let modalTitle = $(".modal-title");
+
+    modalBody.empty();
+    modalTitle.empty();
+
     //creates pokemon name
     let pName = properCasing(pokemon.name);
     let pokemonName = $("<h2>" + pName + "</h2>");
@@ -37,7 +53,7 @@ let pokemonRepository = (function () {
     pokemonImage.classList.add("pokemon-image");
 
     //creates pokemon height
-    let pHeightCm = pokemon.height * 10;
+    let pHeightCm = pokemon.height * 10; //converts to cm
     let pokemonHeight = $("<p>" + "Height: " + pHeightCm + "cm" + "</p>");
 
     //creates type(s) of pokemon list
@@ -57,10 +73,9 @@ let pokemonRepository = (function () {
     let formatType = pokemonTypes.length < 2 ? "Type: " : "Types: ";
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
-    modalBody.empty();
-    modalTitle.empty();
+
     //appends all creations from above
-    modalTitle.append(pokemonName);
+    modalTitle.append(pokemonName); //name for modal
     modalBody.append(pokemonHeight);
     modalBody.append(pokemonTypesLocation);
     modalBody.append(pokemonImage);
@@ -133,6 +148,7 @@ let pokemonRepository = (function () {
     showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails,
+    findPokemon: findPokemon,
   };
 })();
 
