@@ -1,5 +1,5 @@
 body {
-  background-image: radial-gradient(circle, rgb(196, 192, 192), white);
+  background-color: rgb(245, 246, 248);
 }
 
 .page-container {
@@ -13,13 +13,26 @@ body {
 .pokeball-image {
   width: 40%;
 }
+
+#search-pokemon {
+  text-align: center;
+  padding: 25px;
+  border-radius: 10px;
+  border: rgb(102, 101, 101) solid;
+}
+
+.sort-form {
+  float: right;
+  margin: 0 20px;
+}
+
 .title {
   text-align: center;
   font-size: 50px;
+  margin: 15px;
 }
 
 .pokemon-list {
-  margin: 0px auto;
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -51,11 +64,15 @@ body {
 
 .pokemon-list .btn {
   background-color: rgb(212, 16, 16);
-  width: 50%;
+  width: 45%;
   padding: 20px 0;
   font-size: large;
   border: black solid;
   color: white;
+}
+
+.btn:hover {
+  background-color: rgb(70, 68, 66);
 }
 
 li {

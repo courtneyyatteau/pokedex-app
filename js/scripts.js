@@ -20,8 +20,63 @@ let pokemonRepository = (function () {
     });
   }
 
+  //sorts pokemon in numerical descending/ascending or alphabtical A-Z/Z-A order
+  function sort() { 
+    let value = document.getElementById("options").value;
+    let listBeforeSort = [];
+
+    if (value === "Descending") {
+      $(".pokemon-list").empty();
+      repository.forEach((pokemon) => {
+        addListItem(pokemon, value);
+      });
+    } else if (value === "Ascending") {
+      $(".pokemon-list").empty();
+      repository.forEach((pokemon) => {
+        addListItem(pokemon, value);
+      });
+    } else if (value === "A-Z") {
+      $(".pokemon-list").empty();
+      for (i = 0; i < repository.length; i++) {
+        listBeforeSort.push(repository[i]);
+      }
+      listBeforeSort.sort(dynamicSort("name"));
+      listBeforeSort.forEach((pokemon) => {
+        addListItem(pokemon, value);
+      });
+    } else if (value === "Z-A") {
+      $(".pokemon-list").empty();
+      for (i = 0; i < repository.length; i++) {
+        listBeforeSort.push(repository[i]);
+      }
+      listBeforeSort.sort(dynamicSort("name"));
+      let finalList = listBeforeSort.reverse();
+      finalList.forEach((pokemon) => {
+        addListItem(pokemon);
+      });
+    }
+  }
+
+  //alphabeical sorter
+  function dynamicSort(property) {
+    var sortOrder = 1;
+
+    if (property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+    }
+
+    return function (a, b) {
+      if (sortOrder == -1) {
+        return b[property].localeCompare(a[property]);
+      } else {
+        return a[property].localeCompare(b[property]);
+      }
+    };
+  }
+
   function findPokemon(searchName) {
-    // Clear the all the buttons on the page when user types in search box
+    // Clear all the buttons on the page when user types in search box
     $(".pokemon-list").empty();
 
     // Add pokemon buttons for which the name includes the search string
@@ -32,6 +87,7 @@ let pokemonRepository = (function () {
     });
   }
 
+  //makes each String start with uppercase letter
   function properCasing(item) {
     return item.charAt(0).toUpperCase() + item.slice(1);
   }
@@ -193,7 +249,7 @@ let pokemonRepository = (function () {
   }
 
   //creates a button list of pokemon
-  function addListItem(pokemon) {
+  function addListItem(pokemon, order) {
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
     listpokemon.classList.add("group-list-item");
@@ -204,7 +260,11 @@ let pokemonRepository = (function () {
     pokemonName = properCasing(pokemon.name);
     button.innerHTML = pokemonName;
     listpokemon.appendChild(button);
-    pokemonList.appendChild(listpokemon);
+    if (order === "Descending") {
+      pokemonList.insertBefore(listpokemon, pokemonList.firstChild);
+    } else {
+      pokemonList.appendChild(listpokemon);
+    }
     addListener(button, pokemon);
   }
 
@@ -253,6 +313,7 @@ let pokemonRepository = (function () {
     loadList: loadList,
     loadDetails: loadDetails,
     findPokemon: findPokemon,
+    sort: sort,
   };
 })();
 
