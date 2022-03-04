@@ -5,17 +5,14 @@ body {
 .page-container {
   margin-top: 90px;
 }
-
-.pokeball-image {
-  width: 5%;
-  padding: 0 20px;
-}
-
 .navbar {
   border: groove;
   background-color: rgb(197, 204, 204);
 }
 
+.pokeball-image {
+  width: 40%;
+}
 .title {
   text-align: center;
   font-size: 50px;
@@ -40,6 +37,9 @@ body {
 @media (max-width: 650px) {
   .pokemon-list {
     grid-template-columns: 1fr;
+  }
+  .pokeball-image {
+    display: none;
   }
 }
 
