@@ -1,13 +1,9 @@
-div {
-  font-size: large;
+body {
+  background-image: radial-gradient(circle, rgb(196, 192, 192), white);
 }
 
 .page-container {
-  margin-top: 80px;
-}
-
-.title {
-  text-align: center;
+  margin-top: 90px;
 }
 
 .pokeball-image {
@@ -15,20 +11,74 @@ div {
   padding: 0 20px;
 }
 
+.navbar {
+  border: groove;
+  background-color: rgb(197, 204, 204);
+}
+
+.title {
+  text-align: center;
+  font-size: 50px;
+}
+
 .pokemon-list {
   margin: 0px auto;
-  text-align: center;
   list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+}
+
+@supports (display: grid) {
+  .pokemon-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+}
+
+@media (max-width: 650px) {
+  .pokemon-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media all and (min-width: 650px) and (max-width: 1000px) {
+  .pokemon-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pokemon-list .btn {
+  background-color: rgb(212, 16, 16);
+  width: 50%;
+  padding: 20px 0;
+  font-size: large;
+  border: black solid;
+  color: white;
 }
 
 li {
   margin: 20px;
 }
 
-.pokemon-image {
-  width: 50%;
+.modal-header {
+  text-align: center;
 }
 
-.form-inline {
-  float: left;
+p,
+.modal-body {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  font-size: x-large;
+}
+
+.pokmon-types {
+  justify-content: center;
+}
+
+.pokemon-image {
+  width: 55%;
+  justify-self: center;
 }
