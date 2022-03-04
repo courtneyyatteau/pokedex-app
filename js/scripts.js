@@ -1,6 +1,6 @@
 let pokemonRepository = (function () {
   let repository = [];
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=151";
   let modalContainer = document.querySelector(".modal-container");
 
   //adds a pokemon to the list
@@ -21,7 +21,7 @@ let pokemonRepository = (function () {
   }
 
   //sorts pokemon in numerical descending/ascending or alphabtical A-Z/Z-A order
-  function sort() { 
+  function sort() {
     let value = document.getElementById("options").value;
     let listBeforeSort = [];
 
@@ -95,14 +95,16 @@ let pokemonRepository = (function () {
   function showModal(pokemon) {
     let modalBody = $(".modal-body");
     let modalTitle = $(".modal-title");
-    let imageType = $(".image-type");
+    let modalWeight = $(".weight");
 
     modalBody.empty();
     modalTitle.empty();
 
+    let pokemonValue = pValue(pokemon);
+
     //creates pokemon name
     let pName = properCasing(pokemon.name);
-    let pokemonName = $("<h2>" + pName + "</h2>");
+    let pokemonName = $("<h2>" + "#" + pokemonValue + "  " + pName + "</h2>");
 
     //creates pokemon height
     let pHeightCm = pokemon.height * 10; //converts to cm
@@ -120,13 +122,32 @@ let pokemonRepository = (function () {
       for (i = 1; i < pokemonTypes.length; i++) {
         let type = properCasing(pokemonTypes[i].type.name);
         pokemonTypesList += `, ${type}`;
-        let pokemonTypeImage = document.createElement("img");
       }
+    }
+
+    function pValue(pokemon) {
+      let startNumber;
+      let url = pokemon.detailsUrl;
+      startNumber = url.indexOf("pokemon");
+      let value = url.substr(startNumber + 8);
+      let newVal = value.slice(0, value.length - 1);
+      let pokemonValue;
+      if (newVal.length === 1) {
+        pokemonValue = "00" + newVal;
+      } else if (newVal.length === 2) {
+        pokemonValue = "0" + newVal;
+      } else {
+        pokemonValue = newVal;
+      }
+      return pokemonValue;
     }
 
     let formatType = pokemonTypes.length < 2 ? "Type: " : "Types: ";
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
+
+    let pWeightKg = pokemon.weight / 10;
+    let pokemonWeight = $("<p>" + "Weight: " + pWeightKg + "kg" + "</p>");
 
     //creates pokemon image
     let pokemonImage = document.createElement("img");
@@ -136,9 +157,9 @@ let pokemonRepository = (function () {
     //appends all creations from above
     modalTitle.append(pokemonName);
     modalBody.append(pokemonHeight);
+    modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypesLocation);
     modalBody.append(pokemonImage);
-
     modalBackground(modalBody, pokemon);
   }
 
@@ -299,6 +320,7 @@ let pokemonRepository = (function () {
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
         item.types = details.types;
+        item.weight = details.weight;
       })
       .catch(function (e) {
         console.error(e);

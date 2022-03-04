@@ -1,10 +1,11 @@
 body {
-  background-color: rgb(245, 246, 248);
+  background-image: url("/img/pokemon-background.jpg");
 }
 
 .page-container {
   margin-top: 90px;
 }
+
 .navbar {
   border: groove;
   background-color: rgb(197, 204, 204);
@@ -23,13 +24,24 @@ body {
 
 .sort-form {
   float: right;
-  margin: 0 20px;
+  margin: 5px 25px;
+  font-size: 19px;
+}
+
+select {
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+option {
+  cursor: pointer;
 }
 
 .title {
   text-align: center;
-  font-size: 50px;
+  font-size: 80px;
   margin: 15px;
+  font-family: "Luckiest Guy", cursive;
 }
 
 .pokemon-list {
@@ -37,38 +49,50 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
+  grid-row-gap: 10px;
 }
 
 @supports (display: grid) {
   .pokemon-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
   }
 }
 
 @media (max-width: 650px) {
   .pokemon-list {
     grid-template-columns: 1fr;
+    grid-row-gap: 0px;
   }
   .pokeball-image {
     display: none;
   }
+  .title {
+    font-size: 60px;
+  }
+  .sort-form {
+    font-size: 15px;
+  }
 }
 
-@media all and (min-width: 650px) and (max-width: 1000px) {
+@media (min-width: 650px) and (max-width: 1200px) {
   .pokemon-list {
     grid-template-columns: 1fr 1fr;
+  }
+  .title {
+    font-size: 70px;
   }
 }
 
 .pokemon-list .btn {
   background-color: rgb(212, 16, 16);
-  width: 45%;
+  width: 50%;
   padding: 20px 0;
   font-size: large;
   border: black solid;
   color: white;
+  font-family: "Balsamiq Sans", cursive;
+  font-size: 130%;
 }
 
 .btn:hover {
@@ -79,8 +103,8 @@ li {
   margin: 20px;
 }
 
-.modal-header {
-  text-align: center;
+.modal-title {
+  font-family: "Alfa Slab One", cursive;
 }
 
 p,
@@ -96,6 +120,6 @@ p,
 }
 
 .pokemon-image {
-  width: 55%;
-  justify-self: center;
+  width: 45%;
+  margin: 0;
 }
