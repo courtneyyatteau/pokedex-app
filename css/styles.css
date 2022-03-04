@@ -136,7 +136,16 @@ p,
 }
 
 .pokemon-image {
-  width: 170px;
-  margin-bottom: 50px;
-  margin-top: 20px;
+  width: 150px;
+}
+
+.change-image {
+  margin-top: 15px;
+  float: center;
+  border: none;
+  padding: 5px;
+  font-size: small;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
 }

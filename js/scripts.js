@@ -154,12 +154,32 @@ let pokemonRepository = (function () {
     pokemonImage.src = pokemon.front;
     pokemonImage.classList.add("pokemon-image");
 
+    let newLine = document.createElement("br");
+
+    let toBack = document.createElement("button");
+    let backLink = document.createTextNode("Change Image");
+    toBack.appendChild(backLink);
+    toBack.title = "Change Image";
+    toBack.classList.add("change-image");
+
+    toBack.addEventListener("click", function () {
+      if (pokemonImage.src.match(pokemon.front)) {
+        pokemonImage.src = pokemon.front1;
+      } else if (pokemonImage.src.match(pokemon.front1)) {
+        pokemonImage.src = pokemon.front2;
+      } else {
+        pokemonImage.src = pokemon.front;
+      }
+    });
+
     //appends all creations from above
     modalTitle.append(pokemonName);
     modalBody.append(pokemonHeight);
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypesLocation);
     modalBody.append(pokemonImage);
+    modalBody.append(newLine);
+    modalBody.append(toBack);
     modalBackground(modalBody, pokemon);
   }
 
@@ -260,6 +280,7 @@ let pokemonRepository = (function () {
     modalBody.css("background-image", image);
     modalBody.css("background-color", color);
     modalBody.css("border", border);
+
   }
 
   //adds a click listener and when a pokemon button is pressed it shows pokemon name
@@ -279,6 +300,7 @@ let pokemonRepository = (function () {
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#pokemonModal");
     pokemonName = properCasing(pokemon.name);
+    let pImage = document.createElement("img");
     button.innerHTML = pokemonName;
     listpokemon.appendChild(button);
     if (order === "Descending") {
@@ -320,7 +342,8 @@ let pokemonRepository = (function () {
         item.imageUrl = details.sprites.front_default;
         item.imageUrlBack = details.sprites.front_default;
         item.front = details.sprites.other.dream_world.front_default;
-        item.frontBtn = details.sprites.other.home.front_default;
+        item.front1 = details.sprites.other.home.front_default;
+        item.front2 = details.sprites.front_default;
         item.height = details.height;
         item.types = details.types;
         item.weight = details.weight;
