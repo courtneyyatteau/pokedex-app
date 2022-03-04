@@ -151,7 +151,7 @@ let pokemonRepository = (function () {
 
     //creates pokemon image
     let pokemonImage = document.createElement("img");
-    pokemonImage.src = pokemon.imageUrl;
+    pokemonImage.src = pokemon.front;
     pokemonImage.classList.add("pokemon-image");
 
     //appends all creations from above
@@ -272,7 +272,7 @@ let pokemonRepository = (function () {
   //creates a button list of pokemon
   function addListItem(pokemon, order) {
     let pokemonList = document.querySelector(".pokemon-list");
-    let listpokemon = document.createElement("li");
+    let listpokemon = document.createElement("div");
     listpokemon.classList.add("group-list-item");
     let button = document.createElement("button");
     button.classList.add("btn");
@@ -318,6 +318,9 @@ let pokemonRepository = (function () {
       .then(function (details) {
         // Now we add the details to the item
         item.imageUrl = details.sprites.front_default;
+        item.imageUrlBack = details.sprites.front_default;
+        item.front = details.sprites.other.dream_world.front_default;
+        item.frontBtn = details.sprites.other.home.front_default;
         item.height = details.height;
         item.types = details.types;
         item.weight = details.weight;
