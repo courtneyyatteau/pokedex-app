@@ -108,72 +108,72 @@ let pokemonRepository = (function () {
         border = "2px solid #6D7815";
         break;
       } else if (type === "fire") {
-        color = `rgb(240, 128, 48 ${opacity})`;
+        color = `rgb(240, 128, 48, ${opacity})`;
         image = 'url("/img/icons/fire.svg")';
         border = "2px solid #9C531F";
         break;
       } else if (type === "water") {
-        color = `rgb(104, 144, 240rgb(104, 144, 240 ${opacity})`;
+        color = `rgb(104, 144, 240, ${opacity})`;
         image = 'url("/img/icons/water.svg")';
         border = "2px solid #445E9C";
         break;
       } else if (type === "electric") {
-        color = `rgb(248, 208, 48 ${opacity})`;
+        color = `rgb(248, 208, 48, ${opacity})`;
         image = 'url("/img/icons/electric.svg")';
         border = "2px solid #A1871F";
         break;
       } else if (type === "ice") {
-        color = `rgb(152, 216, 216 ${opacity})`;
+        color = `rgb(152, 216, 216, ${opacity})`;
         image = 'url("/img/icons/ice.svg")';
         border = "2px solid #638D8D";
         break;
       } else if (type === "ground") {
-        color = `rgb(224, 192, 104 ${opacity})`;
+        color = `rgb(224, 192, 104, ${opacity})`;
         image = 'url("/img/icons/ground.svg")';
         border = "2px solid #927D44";
         break;
       } else if (type === "flying") {
-        color = `rgb(168, 144, 240 ${opacity})`;
+        color = `rgb(168, 144, 240, ${opacity})`;
         image = 'url("/img/icons/flying.svg")';
         border = "2px solid #6D5E9C";
         break;
       } else if (type === "ghost") {
-        color = `rgb(112, 88, 152 ${opacity})`;
+        color = `rgb(112, 88, 152, ${opacity})`;
         image = 'url("/img/icons/ghost.svg")';
         border = "2px solid #493963";
         break;
       } else if (type === "rock") {
-        color = `rgb(184, 160, 56 ${opacity})`;
+        color = `rgb(184, 160, 56, ${opacity})`;
         image = 'url("/img/icons/rock.svg")';
         border = "2px solid #786824";
         break;
       } else if (type === "fighting") {
-        color = `rgb(192, 48, 40 ${opacity})`;
+        color = `rgb(192, 48, 40, ${opacity})`;
         image = 'url("/img/icons/fighting.svg")';
         border = "2px solid #7D1F1A";
         break;
       } else if (type === "poison") {
-        color = `rgb(160, 64, 160 ${opacity})`;
+        color = `rgb(160, 64, 160, ${opacity})`;
         image = 'url("/img/icons/poison.svg")';
         border = "2px solid #682A68";
         break;
       } else if (type === "psychic") {
-        color = `rgb(248, 88, 136 ${opacity})`;
+        color = `rgb(248, 88, 136, ${opacity})`;
         image = 'url("/img/icons/psychic.svg")';
         border = "2px solid #A13959";
         break;
       } else if (type === "dark") {
-        color = `rgb(112, 88, 72 ${opacity})`;
+        color = `rgb(112, 88, 72, ${opacity})`;
         image = 'url("/img/icons/dark.svg")';
         border = "2px solid #49392F";
         break;
       } else if (type === "steel") {
-        color = `rgb(184, 184, 208 ${opacity})`;
+        color = `rgb(184, 184, 208, ${opacity})`;
         image = 'url("/img/icons/steel.svg")';
         border = "2px solid #787887";
         break;
       } else if (type === "dragon") {
-        color = `rgb(112, 56, 248 ${opacity})`;
+        color = `rgb(112, 56, 248, ${opacity})`;
         image = 'url("/img/icons/dragon.svg")';
         border = "2px solid #4924A1";
         break;
