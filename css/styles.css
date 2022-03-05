@@ -17,7 +17,7 @@ body {
 
 #search-pokemon {
   text-align: center;
-  padding: 25px;
+  padding: 20px 5px;
   border-radius: 10px;
   border: rgb(102, 101, 101) solid;
 }
@@ -78,6 +78,11 @@ option {
   }
   .sort-form {
     font-size: 15px;
+  }
+  #search-pokemon {
+    padding: 10px 0px;
+    font-size: 15px;
+    border-radius: 7px;
   }
   .pokemon-image {
     width: 30%;
