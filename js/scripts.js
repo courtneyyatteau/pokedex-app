@@ -81,7 +81,7 @@ let pokemonRepository = (function () {
 
     // Add pokemon buttons for which the name includes the search string
     repository.forEach((pokemon) => {
-      if (properCasing(pokemon.name).includes(properCasing(searchName))) {
+      if (properCasing(pokemon.name).indexOf(properCasing(searchName)) > -1) {
         addListItem(pokemon);
       }
     });
@@ -104,6 +104,24 @@ let pokemonRepository = (function () {
     //creates pokemon name
     let pName = properCasing(pokemon.name);
     let pokemonName = $("<h2>" + "#" + pokemonValue + "  " + pName + "</h2>");
+
+    //get pokemon number
+    function pValue(pokemon) {
+      let startNumber;
+      let url = pokemon.detailsUrl;
+      startNumber = url.indexOf("pokemon");
+      let value = url.substr(startNumber + 8);
+      let newVal = value.slice(0, value.length - 1);
+      let pokemonValue;
+      if (newVal.length === 1) {
+        pokemonValue = "00" + newVal;
+      } else if (newVal.length === 2) {
+        pokemonValue = "0" + newVal;
+      } else {
+        pokemonValue = newVal;
+      }
+      return pokemonValue;
+    }
 
     //creates pokemon height
     let pHeightCm = pokemon.height * 10; //converts to cm
@@ -189,26 +207,28 @@ let pokemonRepository = (function () {
       }
     }
 
-    function pValue(pokemon) {
-      let startNumber;
-      let url = pokemon.detailsUrl;
-      startNumber = url.indexOf("pokemon");
-      let value = url.substr(startNumber + 8);
-      let newVal = value.slice(0, value.length - 1);
-      let pokemonValue;
-      if (newVal.length === 1) {
-        pokemonValue = "00" + newVal;
-      } else if (newVal.length === 2) {
-        pokemonValue = "0" + newVal;
-      } else {
-        pokemonValue = newVal;
-      }
-      return pokemonValue;
-    }
-
     let formatType = pokemonTypes.length < 2 ? "Type: " : "Types: ";
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
+
+    let pokemonAbilitiesLocation = document.createElement("p");
+    let pokemonAbilities = pokemon.abilities;
+    let pokemonAbilitiesList = "";
+    if (!pokemonAbilities) {
+      pokemonAbilitiesList = "None";
+    } else {
+      let firstAbility = properCasing(pokemonAbilities[0].ability.name);
+      pokemonAbilitiesList += `${firstAbility}`;
+      for (i = 1; i < pokemonAbilities.length; i++) {
+        let ability = properCasing(pokemonAbilities[i].ability.name);
+        pokemonAbilitiesList += `, ${ability}`;
+      }
+    }
+
+    let formatAbilities =
+      pokemonAbilities.length < 2 ? "Ability: " : "Abilities: ";
+    pokemonAbilitiesLocation.innerText = `${formatAbilities}${pokemonAbilitiesList}`;
+    pokemonAbilitiesLocation.classList.add("pokemon-abilities");
 
     //creates pokemon image
     let pokemonImage = document.createElement("img");
@@ -218,10 +238,11 @@ let pokemonRepository = (function () {
     let newLine = document.createElement("br");
 
     let toBack = document.createElement("button");
-    let backLink = document.createTextNode("Change Image");
+    let backLink = document.createTextNode(">");
     toBack.appendChild(backLink);
     toBack.title = "Change Image";
     toBack.classList.add("change-image");
+    toBack.classList.add("btn-secondary");
 
     toBack.addEventListener("click", function () {
       if (pokemonImage.src.match(pokemon.front)) {
@@ -233,20 +254,85 @@ let pokemonRepository = (function () {
       }
     });
 
-    //appends all creations from above
-    modalTitle.append(pokemonName);
-    modalBody.append(pokemonHeight);
-    modalBody.append(inchBtn);
-    modalBody.append(cmBtn);
-    modalBody.append(pokemonWeight);
-    modalBody.append(lbsBtn);
-    modalBody.append(kgBtn);
+    let toFront = document.createElement("button");
+    let frontLink = document.createTextNode("<");
+    toFront.appendChild(frontLink);
+    toFront.title = "Change Image";
+    toFront.classList.add("change-image-left");
+    toFront.classList.add("btn-secondary");
 
-    modalBody.append(pokemonTypesLocation);
-    modalBody.append(pokemonImage);
-    modalBody.append(newLine);
-    modalBody.append(toBack);
-    modalBackground(modalBody, pokemon);
+    toFront.addEventListener("click", function () {
+      if (pokemonImage.src.match(pokemon.front)) {
+        pokemonImage.src = pokemon.front2;
+      } else if (pokemonImage.src.match(pokemon.front2)) {
+        pokemonImage.src = pokemon.front1;
+      } else {
+        pokemonImage.src = pokemon.front;
+      }
+    });
+
+    let statsButton = document.createElement("button");
+    let buttonText = document.createTextNode("View Stats");
+    statsButton.appendChild(buttonText);
+    statsButton.title = "View Stats";
+    statsButton.classList.add("view-stats");
+    statsButton.classList.add("btn-secondary");
+
+    let infoButton = document.createElement("button");
+    let infoText = document.createTextNode("Back to Info");
+    infoButton.appendChild(infoText);
+    infoButton.title = "Back to Info";
+    infoButton.classList.add("view-info");
+    infoButton.classList.add("btn-secondary");
+
+    let statsList = pokemon.stats;
+    console.log(statsList);
+
+    statsButton.addEventListener("click", function () {
+      //put stats here
+      pokemonHeight.remove();
+      inchBtn.remove();
+      cmBtn.remove();
+      pokemonWeight.remove();
+      lbsBtn.remove();
+      kgBtn.remove();
+      pokemonTypesLocation.remove();
+      pokemonAbilitiesLocation.remove();
+      statsButton.remove();
+      toFront.remove();
+      pokemonImage.remove();
+      toBack.remove();
+      modalBody.append(infoButton);
+      modalBody.append(newLine);
+      modalBody.append(toFront);
+      modalBody.append(pokemonImage);
+      modalBody.append(toBack);
+    });
+
+    infoButton.addEventListener("click", function () {
+      showStuff();
+      infoButton.remove();
+    });
+
+    function showStuff() {
+      modalTitle.append(pokemonName);
+      modalBody.append(pokemonHeight);
+      modalBody.append(inchBtn);
+      modalBody.append(cmBtn);
+      modalBody.append(pokemonWeight);
+      modalBody.append(lbsBtn);
+      modalBody.append(kgBtn);
+      modalBody.append(pokemonTypesLocation);
+      modalBody.append(pokemonAbilitiesLocation);
+      modalBody.append(statsButton);
+      modalBody.append(newLine);
+      modalBody.append(toFront);
+      modalBody.append(pokemonImage);
+      modalBody.append(toBack);
+      modalBackground(modalBody, pokemon);
+    }
+    //appends all creations from above
+    showStuff();
   }
 
   function modalBackground(modalBody, pokemon) {
@@ -412,6 +498,7 @@ let pokemonRepository = (function () {
         item.height = details.height;
         item.types = details.types;
         item.weight = details.weight;
+        item.abilities = details.abilities;
       })
       .catch(function (e) {
         console.error(e);
