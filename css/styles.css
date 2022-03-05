@@ -106,7 +106,6 @@ option {
     font-weight: 900;
     font-size: 18px;
   }
-
 }
 
 @media (min-width: 700px) and (max-width: 1100px) {
@@ -122,7 +121,7 @@ option {
 .pokemon-list .btn {
   background-color: rgb(212, 16, 16);
   min-width: 90%;
-  padding: 20px 0;
+  padding: 20px 5px;
   font-size: large;
   border: black solid;
   color: white;
@@ -137,6 +136,8 @@ option {
 li {
   margin: 20px;
 }
+
+
 
 .modal-title {
   font-family: "Alfa Slab One", cursive;
@@ -154,12 +155,50 @@ p,
   font-size: x-large;
 }
 
-.pokmon-types {
-  justify-content: center;
+.height {
+  text-align: center;
+  margin: 0;
 }
 
+.pokemon-weight {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.cm-btn,
+.inch-btn {
+  border-radius: 5px;
+  border: none;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+  float: right;
+  outline: none;
+  margin-right: 60px;
+}
+
+.active:focus {
+  outline: 0 !important;
+}
+
+.active:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  padding: 2px 5px;
+}
+
+.cm-btn {
+  margin-right: 10px;
+}
+
+.active {
+  color: blue;
+}
 .pokemon-image {
   width: 150px;
+  justify-self: center;
 }
 
 .change-image {
@@ -171,4 +210,7 @@ p,
   background-color: black;
   color: white;
   border-radius: 5px;
+  justify-content: center;
+  grid-column-start: 4;
+  grid-column-end: 5;
 }

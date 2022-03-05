@@ -95,7 +95,6 @@ let pokemonRepository = (function () {
   function showModal(pokemon) {
     let modalBody = $(".modal-body");
     let modalTitle = $(".modal-title");
-    let modalWeight = $(".weight");
 
     modalBody.empty();
     modalTitle.empty();
@@ -108,7 +107,39 @@ let pokemonRepository = (function () {
 
     //creates pokemon height
     let pHeightCm = pokemon.height * 10; //converts to cm
-    let pokemonHeight = $("<p>" + "Height: " + pHeightCm + "cm" + "</p>");
+    let pHeightInch = pHeightCm * 0.3937; //converts to inches
+    pHeightInch = Math.round(pHeightInch * 10) / 10;
+
+    let pokemonHeight = $("<p>" + "Height: " + pHeightCm + " cm</p>");
+
+    pokemonHeight.addClass("height");
+
+    let inchBtn = document.createElement("span");
+    let inchLink = document.createTextNode("inch");
+    inchBtn.appendChild(inchLink);
+    inchBtn.title = "Inch";
+    inchBtn.classList.add("inch-btn");
+    inchBtn.classList.add("active");
+
+    inchBtn.addEventListener("click", function () {
+      cmBtn.classList.add("active");
+      inchBtn.classList.remove("active");
+
+      pokemonHeight.text("Height: " + pHeightInch + " in");
+    });
+
+    let cmBtn = document.createElement("span");
+    let cmLink = document.createTextNode("cm");
+    cmBtn.appendChild(cmLink);
+    cmBtn.title = "cm";
+    cmBtn.classList.add("cm-btn");
+
+    cmBtn.addEventListener("click", function () {
+      inchBtn.classList.add("active");
+      cmBtn.classList.remove("active");
+
+      pokemonHeight.text("Height: " + pHeightCm + " cm");
+    });
 
     //creates type(s) of pokemon list
     let pokemonTypesLocation = document.createElement("p");
@@ -148,6 +179,7 @@ let pokemonRepository = (function () {
 
     let pWeightKg = pokemon.weight / 10;
     let pokemonWeight = $("<p>" + "Weight: " + pWeightKg + "kg" + "</p>");
+    pokemonWeight.addClass("pokemon-weight");
 
     //creates pokemon image
     let pokemonImage = document.createElement("img");
@@ -175,6 +207,8 @@ let pokemonRepository = (function () {
     //appends all creations from above
     modalTitle.append(pokemonName);
     modalBody.append(pokemonHeight);
+    modalBody.append(inchBtn);
+    modalBody.append(cmBtn);
     modalBody.append(pokemonWeight);
     modalBody.append(pokemonTypesLocation);
     modalBody.append(pokemonImage);
@@ -280,7 +314,6 @@ let pokemonRepository = (function () {
     modalBody.css("background-image", image);
     modalBody.css("background-color", color);
     modalBody.css("border", border);
-
   }
 
   //adds a click listener and when a pokemon button is pressed it shows pokemon name
