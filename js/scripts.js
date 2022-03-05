@@ -117,9 +117,15 @@ let pokemonRepository = (function () {
     let inchBtn = document.createElement("span");
     let inchLink = document.createTextNode("inch");
     inchBtn.appendChild(inchLink);
-    inchBtn.title = "Inch";
+    inchBtn.title = "inch";
     inchBtn.classList.add("inch-btn");
     inchBtn.classList.add("active");
+
+    let cmBtn = document.createElement("span");
+    let cmLink = document.createTextNode("cm");
+    cmBtn.appendChild(cmLink);
+    cmBtn.title = "cm";
+    cmBtn.classList.add("cm-btn");
 
     inchBtn.addEventListener("click", function () {
       cmBtn.classList.add("active");
@@ -128,17 +134,44 @@ let pokemonRepository = (function () {
       pokemonHeight.text("Height: " + pHeightInch + " in");
     });
 
-    let cmBtn = document.createElement("span");
-    let cmLink = document.createTextNode("cm");
-    cmBtn.appendChild(cmLink);
-    cmBtn.title = "cm";
-    cmBtn.classList.add("cm-btn");
-
     cmBtn.addEventListener("click", function () {
       inchBtn.classList.add("active");
       cmBtn.classList.remove("active");
 
       pokemonHeight.text("Height: " + pHeightCm + " cm");
+    });
+
+    let pWeightKg = pokemon.weight / 10;
+    let pWeightLbs = pWeightKg * 2.20462262185;
+    pWeightLbs = Math.round(pWeightLbs * 10) / 10;
+    let pokemonWeight = $("<p>" + "Weight: " + pWeightKg + " kg" + "</p>");
+    pokemonWeight.addClass("pokemon-weight");
+
+    let lbsBtn = document.createElement("span");
+    let lbsLink = document.createTextNode("lbs");
+    lbsBtn.appendChild(lbsLink);
+    lbsBtn.title = "lbs";
+    lbsBtn.classList.add("lbs-btn");
+    lbsBtn.classList.add("active");
+
+    let kgBtn = document.createElement("span");
+    let kgLink = document.createTextNode("kg");
+    kgBtn.appendChild(kgLink);
+    kgBtn.title = "kg";
+    kgBtn.classList.add("kg-btn");
+
+    lbsBtn.addEventListener("click", function () {
+      kgBtn.classList.add("active");
+      lbsBtn.classList.remove("active");
+
+      pokemonWeight.text("Weight: " + pWeightLbs + " lbs");
+    });
+
+    kgBtn.addEventListener("click", function () {
+      lbsBtn.classList.add("active");
+      kgBtn.classList.remove("active");
+
+      pokemonWeight.text("Weight: " + pWeightKg + " kg");
     });
 
     //creates type(s) of pokemon list
@@ -177,10 +210,6 @@ let pokemonRepository = (function () {
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
 
-    let pWeightKg = pokemon.weight / 10;
-    let pokemonWeight = $("<p>" + "Weight: " + pWeightKg + "kg" + "</p>");
-    pokemonWeight.addClass("pokemon-weight");
-
     //creates pokemon image
     let pokemonImage = document.createElement("img");
     pokemonImage.src = pokemon.front;
@@ -210,6 +239,9 @@ let pokemonRepository = (function () {
     modalBody.append(inchBtn);
     modalBody.append(cmBtn);
     modalBody.append(pokemonWeight);
+    modalBody.append(lbsBtn);
+    modalBody.append(kgBtn);
+
     modalBody.append(pokemonTypesLocation);
     modalBody.append(pokemonImage);
     modalBody.append(newLine);
