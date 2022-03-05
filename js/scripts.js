@@ -286,8 +286,144 @@ let pokemonRepository = (function () {
     infoButton.classList.add("btn-secondary");
 
     let statsList = pokemon.stats;
-    console.log(statsList);
+    let hp = statsList[0].base_stat;
+    let attack = statsList[1].base_stat;
+    let defense = statsList[2].base_stat;
+    let specialAttack = statsList[3].base_stat;
+    let specialDefense = statsList[4].base_stat;
+    let speed = statsList[5].base_stat;
 
+    //Stats Chart container
+    let container = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+
+    container.setAttribute("viewbox", "0 0 24 24");
+    container.setAttribute("width", "450px");
+    container.setAttribute("height", "222px");
+    //group element
+    let g1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    let g2 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    let g3 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    let g4 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    let g5 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    let g6 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    let rectangle1 = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+    let rectangle2 = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+    let rectangle3 = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+    let rectangle4 = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+    let rectangle5 = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+    let rectangle6 = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+
+    let text1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    let text2 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    let text3 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    let text4 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    let text5 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    let text6 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+    function calculateTextX(value) {
+      return (value + 10).toString();
+    }
+
+    let hp2String = hp.toString();
+    let hpText = calculateTextX(hp);
+    let attack2String = attack.toString();
+    let attackText = calculateTextX(attack);
+    let defense2String = defense.toString();
+    let defenseText = calculateTextX(defense);
+    let sa2String = specialAttack.toString();
+    let saText = calculateTextX(specialAttack);
+    let sd2String = specialDefense.toString();
+    let sdText = calculateTextX(specialDefense);
+    let speed2String = speed.toString();
+    let speedText = calculateTextX(speed);
+
+    rectangle1.setAttribute("width", hp2String);
+    rectangle1.setAttribute("height", "19");
+    rectangle1.setAttribute("y", "10");
+    text1.setAttribute("x", hpText);
+    text1.setAttribute("y", "29");
+    textNode1 = document.createTextNode("HP: " + hp2String);
+    text1.appendChild(textNode1);
+    g1.appendChild(text1);
+    g1.appendChild(rectangle1);
+    container.appendChild(g1);
+
+    rectangle2.setAttribute("width", attack2String);
+    rectangle2.setAttribute("height", "19");
+    rectangle2.setAttribute("y", "40");
+    text2.setAttribute("x", attackText);
+    text2.setAttribute("y", "58");
+    textNode2 = document.createTextNode("Attack: " + attack2String);
+    text2.appendChild(textNode2);
+    g2.appendChild(text2);
+    g2.appendChild(rectangle2);
+    container.appendChild(g2);
+
+    rectangle3.setAttribute("width", defense2String);
+    rectangle3.setAttribute("height", "19");
+    rectangle3.setAttribute("y", "70");
+    text3.setAttribute("x", defenseText);
+    text3.setAttribute("y", "87");
+    textNode3 = document.createTextNode("Defense: " + defense2String);
+    text3.appendChild(textNode3);
+    g3.appendChild(text3);
+    g3.appendChild(rectangle3);
+    container.appendChild(g3);
+
+    rectangle4.setAttribute("width", sa2String);
+    rectangle4.setAttribute("height", "19");
+    rectangle4.setAttribute("y", "100");
+    text4.setAttribute("x", saText);
+    text4.setAttribute("y", "116");
+    textNode4 = document.createTextNode("Special Attack: " + sa2String);
+    text4.appendChild(textNode4);
+    g4.appendChild(text4);
+    g4.appendChild(rectangle4);
+    container.appendChild(g4);
+
+    rectangle5.setAttribute("width", sd2String);
+    rectangle5.setAttribute("height", "19");
+    rectangle5.setAttribute("y", "130");
+    text5.setAttribute("x", sdText);
+    text5.setAttribute("y", "145");
+    textNode5 = document.createTextNode("Special Defense: " + sd2String);
+    text5.appendChild(textNode5);
+    g5.appendChild(text5);
+    g5.appendChild(rectangle5);
+    container.appendChild(g5);
+
+    rectangle6.setAttribute("width", speed2String);
+    rectangle6.setAttribute("height", "19");
+    rectangle6.setAttribute("y", "160");
+    text6.setAttribute("x", speedText);
+    text6.setAttribute("y", "174");
+    textNode6 = document.createTextNode("Speed: " + speed2String);
+    text6.appendChild(textNode6);
+    g6.appendChild(text6);
+    g6.appendChild(rectangle6);
+    container.appendChild(g6);
     statsButton.addEventListener("click", function () {
       //put stats here
       pokemonHeight.remove();
@@ -302,6 +438,8 @@ let pokemonRepository = (function () {
       toFront.remove();
       pokemonImage.remove();
       toBack.remove();
+      modalBody.append(container);
+
       modalBody.append(infoButton);
       modalBody.append(newLine);
       modalBody.append(toFront);
@@ -312,6 +450,7 @@ let pokemonRepository = (function () {
     infoButton.addEventListener("click", function () {
       showStuff();
       infoButton.remove();
+      container.remove();
     });
 
     function showStuff() {
@@ -499,6 +638,7 @@ let pokemonRepository = (function () {
         item.types = details.types;
         item.weight = details.weight;
         item.abilities = details.abilities;
+        item.stats = details.stats;
       })
       .catch(function (e) {
         console.error(e);

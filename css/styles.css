@@ -226,13 +226,14 @@ p,
 }
 
 .pokemon-image {
-  width: 230px;
+  width: 50%;
   justify-self: center;
   padding: 25px;
 }
 
 .view-stats,
-.view-info, .close-btn {
+.view-info,
+.close-btn {
   margin-top: 0;
   padding: 11px 15px 8px 15px;
   font-family: "Balsamiq Sans", cursive;
