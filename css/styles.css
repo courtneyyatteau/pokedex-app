@@ -118,6 +118,14 @@ option {
   svg {
     height: 200px;
   }
+
+  .cm-btn,
+  .inch-btn,
+  .kg-btn,
+  .lbs-btn {
+    float: right;
+    margin: 0;
+  }
 }
 
 @media (min-width: 700px) and (max-width: 1100px) {
@@ -182,7 +190,6 @@ p,
   text-decoration: none;
   font-size: 18px;
   float: right;
-  margin-right: 90px;
   outline: none;
   line-height: 0.1;
 }
@@ -218,7 +225,6 @@ p,
   text-decoration: none;
   font-size: 17px;
   float: right;
-  margin-right: 110px;
   outline: none;
   line-height: 0.1;
 }
