@@ -2,7 +2,6 @@ let pokemonRepository = (function () {
   let repository = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=151";
   let modalContainer = document.querySelector(".modal-container");
-
   //adds a pokemon to the list
   function add(pokemon) {
     repository.push(pokemon);
@@ -370,6 +369,13 @@ let pokemonRepository = (function () {
     g1.appendChild(rectangle1);
     container.appendChild(g1);
 
+    rectangle1.setAttribute("fill", modalBackground(modalBody, pokemon));
+    rectangle2.setAttribute("fill", modalBackground(modalBody, pokemon));
+    rectangle3.setAttribute("fill", modalBackground(modalBody, pokemon));
+    rectangle4.setAttribute("fill", modalBackground(modalBody, pokemon));
+    rectangle5.setAttribute("fill", modalBackground(modalBody, pokemon));
+    rectangle6.setAttribute("fill", modalBackground(modalBody, pokemon));
+
     rectangle2.setAttribute("width", attack2String);
     rectangle2.setAttribute("height", "19");
     rectangle2.setAttribute("y", "40");
@@ -468,102 +474,120 @@ let pokemonRepository = (function () {
       modalBody.append(toFront);
       modalBody.append(pokemonImage);
       modalBody.append(toBack);
-      modalBackground(modalBody, pokemon);
     }
     //appends all creations from above
     showStuff();
   }
 
   function modalBackground(modalBody, pokemon) {
+    let color, image, type, border, borderColor;
+
     let pokemonTypes = pokemon.types;
-    let color, image, type, border;
+
     let opacity = 0.25;
     for (i = 0; i < pokemonTypes.length; i++) {
       type = pokemonTypes[i].type.name;
       if (type === "normal") {
-        color = `rgb(168, 168, 120, ${opacity})`;
+        color = `rgb(168, 168, 120, ${opacity}`;
         image = 'url("/img/icons/normal.svg")';
         border = "2px solid #6D6D4E";
+        borderColor = "#6D6D4E";
         break;
       } else if (type === "grass") {
-        color = `rgb(120, 200, 80, ${opacity})`;
+        color = `rgb(120, 200, 80, ${opacity}`;
         image = 'url("/img/icons/grass.svg")';
         border = "2px solid #4E8234";
+        borderColor = "#4E8234";
         break;
       } else if (type === "bug") {
-        color = `rgb(168, 184, 32, ${opacity})`;
+        color = `rgb(168, 184, 32, ${opacity}`;
         image = 'url("/img/icons/bug.svg")';
         border = "2px solid #6D7815";
+        borderColor = "#6D7815";
         break;
       } else if (type === "fire") {
-        color = `rgb(240, 128, 48, ${opacity})`;
+        color = `rgb(240, 128, 48, ${opacity}`;
         image = 'url("/img/icons/fire.svg")';
         border = "2px solid #9C531F";
+        borderColor = "#9C531F";
         break;
       } else if (type === "water") {
-        color = `rgb(104, 144, 240, ${opacity})`;
+        color = `rgb(104, 144, 240, ${opacity}`;
         image = 'url("/img/icons/water.svg")';
         border = "2px solid #445E9C";
+        borderColor = "#445E9C";
         break;
       } else if (type === "electric") {
-        color = `rgb(248, 208, 48, ${opacity})`;
+        color = `rgb(248, 208, 48, ${opacity}`;
         image = 'url("/img/icons/electric.svg")';
         border = "2px solid #A1871F";
+        borderColor = "#A1871F";
         break;
       } else if (type === "ice") {
-        color = `rgb(152, 216, 216, ${opacity})`;
+        color = `rgb(152, 216, 216, ${opacity}`;
         image = 'url("/img/icons/ice.svg")';
         border = "2px solid #638D8D";
+        borderColor = "#638D8D";
         break;
       } else if (type === "ground") {
-        color = `rgb(224, 192, 104, ${opacity})`;
+        color = `rgb(224, 192, 104, ${opacity}`;
         image = 'url("/img/icons/ground.svg")';
         border = "2px solid #927D44";
+        borderColor = "#927D44";
         break;
       } else if (type === "flying") {
-        color = `rgb(168, 144, 240, ${opacity})`;
+        color = `rgb(168, 144, 240, ${opacity}`;
         image = 'url("/img/icons/flying.svg")';
         border = "2px solid #6D5E9C";
+        borderColor = "#6D5E9C";
         break;
       } else if (type === "ghost") {
-        color = `rgb(112, 88, 152, ${opacity})`;
+        color = `rgb(112, 88, 152, ${opacity}`;
         image = 'url("/img/icons/ghost.svg")';
         border = "2px solid #493963";
+        borderColor = "#493963";
         break;
       } else if (type === "rock") {
-        color = `rgb(184, 160, 56, ${opacity})`;
+        color = `rgb(184, 160, 56, ${opacity}`;
         image = 'url("/img/icons/rock.svg")';
         border = "2px solid #786824";
+        borderColor = "#786824";
         break;
       } else if (type === "fighting") {
-        color = `rgb(192, 48, 40, ${opacity})`;
+        color = `rgb(192, 48, 40, ${opacity}`;
         image = 'url("/img/icons/fighting.svg")';
         border = "2px solid #7D1F1A";
+        borderColor = "#7D1F1A";
         break;
       } else if (type === "poison") {
-        color = `rgb(160, 64, 160, ${opacity})`;
+        color = `rgb(160, 64, 160, ${opacity}`;
         image = 'url("/img/icons/poison.svg")';
         border = "2px solid #682A68";
+        borderColor = "#682A68";
         break;
       } else if (type === "psychic") {
-        color = `rgb(248, 88, 136, ${opacity})`;
+        color = `rgb(248, 88, 136, ${opacity}`;
         image = 'url("/img/icons/psychic.svg")';
         border = "2px solid #A13959";
+        borderColor = "#A13959";
         break;
       } else if (type === "dark") {
-        color = `rgb(112, 88, 72, ${opacity})`;
+        color = `rgb(112, 88, 72, ${opacity}`;
         image = 'url("/img/icons/dark.svg")';
         border = "2px solid #49392F";
+        borderColor = "#49392F";
         break;
       } else if (type === "steel") {
-        color = `rgb(184, 184, 208, ${opacity})`;
+        color = `rgb(184, 184, 208, ${opacity}`;
         image = 'url("/img/icons/steel.svg")';
         border = "2px solid #787887";
+        borderColor = "#787887";
         break;
       } else if (type === "dragon") {
-        color = `rgb(112, 56, 248, ${opacity})`;
+        color = `rgb(112, 56, 248, ${opacity}`;
         image = 'url("/img/icons/dragon.svg")';
         border = "2px solid #4924A1";
+        borderColor = "#638D8D";
         break;
       }
     }
@@ -571,6 +595,7 @@ let pokemonRepository = (function () {
     modalBody.css("background-image", image);
     modalBody.css("background-color", color);
     modalBody.css("border", border);
+    return borderColor;
   }
 
   //adds a click listener and when a pokemon button is pressed it shows pokemon name
