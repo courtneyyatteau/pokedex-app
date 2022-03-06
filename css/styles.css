@@ -110,6 +110,14 @@ option {
     font-size: 23px;
     line-height: 1.2;
   }
+
+  text {
+    font-size: 22px;
+  }
+
+  svg {
+    height: 200px;
+  }
 }
 
 @media (min-width: 700px) and (max-width: 1100px) {

@@ -301,6 +301,7 @@ let pokemonRepository = (function () {
     container.setAttribute("viewbox", "0 0 24 24");
     container.setAttribute("width", "450px");
     container.setAttribute("height", "222px");
+
     //group element
     let g1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
     let g2 = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -369,12 +370,13 @@ let pokemonRepository = (function () {
     g1.appendChild(rectangle1);
     container.appendChild(g1);
 
-    rectangle1.setAttribute("fill", modalBackground(modalBody, pokemon));
-    rectangle2.setAttribute("fill", modalBackground(modalBody, pokemon));
-    rectangle3.setAttribute("fill", modalBackground(modalBody, pokemon));
-    rectangle4.setAttribute("fill", modalBackground(modalBody, pokemon));
-    rectangle5.setAttribute("fill", modalBackground(modalBody, pokemon));
-    rectangle6.setAttribute("fill", modalBackground(modalBody, pokemon));
+    let theColor = modalBackground(modalBody, pokemon);
+    rectangle1.setAttribute("fill", theColor);
+    rectangle2.setAttribute("fill", theColor);
+    rectangle3.setAttribute("fill", theColor);
+    rectangle4.setAttribute("fill", theColor);
+    rectangle5.setAttribute("fill", theColor);
+    rectangle6.setAttribute("fill", theColor);
 
     rectangle2.setAttribute("width", attack2String);
     rectangle2.setAttribute("height", "19");
