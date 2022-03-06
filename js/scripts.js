@@ -143,10 +143,13 @@ let pokemonRepository = (function () {
     cmBtn.appendChild(cmLink);
     cmBtn.title = "cm";
     cmBtn.classList.add("cm-btn");
+    cmBtn.classList.add("non-active");
 
     inchBtn.addEventListener("click", function () {
       cmBtn.classList.add("active");
       inchBtn.classList.remove("active");
+      inchBtn.classList.add("non-active");
+      cmBtn.classList.remove("non-active");
 
       pokemonHeight.text("Height: " + pHeightInch + " in");
     });
@@ -154,6 +157,8 @@ let pokemonRepository = (function () {
     cmBtn.addEventListener("click", function () {
       inchBtn.classList.add("active");
       cmBtn.classList.remove("active");
+      cmBtn.classList.add("non-active");
+      inchBtn.classList.remove("non-active");
 
       pokemonHeight.text("Height: " + pHeightCm + " cm");
     });
@@ -176,10 +181,13 @@ let pokemonRepository = (function () {
     kgBtn.appendChild(kgLink);
     kgBtn.title = "kg";
     kgBtn.classList.add("kg-btn");
+    kgBtn.classList.add("non-active");
 
     lbsBtn.addEventListener("click", function () {
       kgBtn.classList.add("active");
       lbsBtn.classList.remove("active");
+      lbsBtn.classList.add("non-active");
+      kgBtn.classList.remove("non-active");
 
       pokemonWeight.text("Weight: " + pWeightLbs + " lbs");
     });
@@ -187,6 +195,8 @@ let pokemonRepository = (function () {
     kgBtn.addEventListener("click", function () {
       lbsBtn.classList.add("active");
       kgBtn.classList.remove("active");
+      kgBtn.classList.add("non-active");
+      lbsBtn.classList.remove("non-active");
 
       pokemonWeight.text("Weight: " + pWeightKg + " kg");
     });

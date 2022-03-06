@@ -182,7 +182,9 @@ p,
   text-decoration: none;
   font-size: 18px;
   float: right;
+  margin-right: 90px;
   outline: none;
+  line-height: 0.1;
 }
 
 .active:focus {
@@ -195,18 +197,18 @@ p,
   padding: 1px 1px;
 }
 
-.cm-btn {
-  margin-right: 8px;
-}
-
 .active {
   color: blue;
 }
 
+.non-active {
+  display: none;
+}
+
 .pokemon-weight {
-  margin-top: 45px;
+  margin-top: 55px;
   text-align: center;
-  line-height: 0.2;
+  line-height: 0.1;
 }
 
 .kg-btn,
@@ -216,17 +218,15 @@ p,
   text-decoration: none;
   font-size: 17px;
   float: right;
+  margin-right: 110px;
   outline: none;
-  line-height: 0.01;
-}
-
-.kg-btn {
-  margin-right: 10px;
+  line-height: 0.1;
 }
 
 .pokemon-types {
   margin-top: 30px;
   margin-bottom: 5px;
+  line-height: 2;
 }
 
 .pokemon-abilities {
@@ -265,4 +265,3 @@ p,
   margin: 0 10px;
   padding: 3px 8px;
 }
-
