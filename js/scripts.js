@@ -127,9 +127,9 @@ let pokemonRepository = (function () {
     let pHeightInch = pHeightCm * 0.3937; //converts to inches
     pHeightInch = Math.round(pHeightInch * 10) / 10;
 
-    let pokemonHeight = $("<p>" + "Height: " + pHeightCm + " cm</p>");
-
-    pokemonHeight.addClass("height");
+    let pokemonHeight = document.createElement("span");
+    pokemonHeight.innerText = `Height: ${pHeightCm} cm`;
+    pokemonHeight.classList.add("pokemon-height");
 
     let inchBtn = document.createElement("span");
     let inchLink = document.createTextNode("inch");
@@ -151,7 +151,7 @@ let pokemonRepository = (function () {
       inchBtn.classList.add("non-active");
       cmBtn.classList.remove("non-active");
 
-      pokemonHeight.text("Height: " + pHeightInch + " in");
+      pokemonHeight.innerText = "Height: " + pHeightInch + " in";
     });
 
     cmBtn.addEventListener("click", function () {
@@ -160,14 +160,16 @@ let pokemonRepository = (function () {
       cmBtn.classList.add("non-active");
       inchBtn.classList.remove("non-active");
 
-      pokemonHeight.text("Height: " + pHeightCm + " cm");
+      pokemonHeight.innerText = "Height: " + pHeightCm + " cm";
     });
 
     let pWeightKg = pokemon.weight / 10;
     let pWeightLbs = pWeightKg * 2.20462262185;
     pWeightLbs = Math.round(pWeightLbs * 10) / 10;
-    let pokemonWeight = $("<p>" + "Weight: " + pWeightKg + " kg" + "</p>");
-    pokemonWeight.addClass("pokemon-weight");
+
+    let pokemonWeight = document.createElement("span");
+    pokemonWeight.innerText = `Weight: ${pWeightKg} kg`;
+    pokemonWeight.classList.add("pokemon-weight");
 
     let lbsBtn = document.createElement("span");
     let lbsLink = document.createTextNode("lbs");
@@ -189,7 +191,7 @@ let pokemonRepository = (function () {
       lbsBtn.classList.add("non-active");
       kgBtn.classList.remove("non-active");
 
-      pokemonWeight.text("Weight: " + pWeightLbs + " lbs");
+      pokemonWeight.innerText = "Weight: " + pWeightLbs + " lbs";
     });
 
     kgBtn.addEventListener("click", function () {
@@ -198,11 +200,11 @@ let pokemonRepository = (function () {
       kgBtn.classList.add("non-active");
       lbsBtn.classList.remove("non-active");
 
-      pokemonWeight.text("Weight: " + pWeightKg + " kg");
+      pokemonWeight.innerText = "Weight: " + pWeightKg + " kg";
     });
 
     //creates type(s) of pokemon list
-    let pokemonTypesLocation = document.createElement("p");
+    let pokemonTypesLocation = document.createElement("div");
     let pokemonTypes = pokemon.types;
     let pokemonTypesList = "";
     if (!pokemonTypes) {
@@ -220,7 +222,7 @@ let pokemonRepository = (function () {
     pokemonTypesLocation.innerText = `${formatType}${pokemonTypesList}`;
     pokemonTypesLocation.classList.add("pokemon-types");
 
-    let pokemonAbilitiesLocation = document.createElement("p");
+    let pokemonAbilitiesLocation = document.createElement("div");
     let pokemonAbilities = pokemon.abilities;
     let pokemonAbilitiesList = "";
     if (!pokemonAbilities) {
@@ -310,7 +312,7 @@ let pokemonRepository = (function () {
 
     container.setAttribute("viewbox", "0 0 24 24");
     container.setAttribute("width", "450px");
-    container.setAttribute("height", "222px");
+    container.setAttribute("height", "200px");
 
     //group element
     let g1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -444,12 +446,8 @@ let pokemonRepository = (function () {
     container.appendChild(g6);
     statsButton.addEventListener("click", function () {
       //put stats here
-      pokemonHeight.remove();
-      inchBtn.remove();
-      cmBtn.remove();
-      pokemonWeight.remove();
-      lbsBtn.remove();
-      kgBtn.remove();
+      container1.remove();
+      container2.remove();
       pokemonTypesLocation.remove();
       pokemonAbilitiesLocation.remove();
       statsButton.remove();
@@ -471,14 +469,22 @@ let pokemonRepository = (function () {
       container.remove();
     });
 
+    let container1 = document.createElement("div");
+    container1.append(pokemonHeight);
+    container1.append(inchBtn);
+    container1.append(cmBtn);
+    container1.classList.add("container1");
+
+    let container2 = document.createElement("div");
+    container2.append(pokemonWeight);
+    container2.append(lbsBtn);
+    container2.append(kgBtn);
+    container2.classList.add("container2");
+
     function showStuff() {
       modalTitle.append(pokemonName);
-      modalBody.append(pokemonHeight);
-      modalBody.append(inchBtn);
-      modalBody.append(cmBtn);
-      modalBody.append(pokemonWeight);
-      modalBody.append(lbsBtn);
-      modalBody.append(kgBtn);
+      modalBody.append(container1);
+      modalBody.append(container2);
       modalBody.append(pokemonTypesLocation);
       modalBody.append(pokemonAbilitiesLocation);
       modalBody.append(statsButton);

@@ -103,28 +103,12 @@ option {
     font-size: 18px;
   }
 
-  .height,
-  .pokemon-weight,
-  .pokemon-types,
-  .pokemon-abilities {
-    font-size: 23px;
-    line-height: 1.2;
-  }
-
   text {
     font-size: 22px;
   }
 
   svg {
     height: 200px;
-  }
-
-  .cm-btn,
-  .inch-btn,
-  .kg-btn,
-  .lbs-btn {
-    float: right;
-    margin: 0;
   }
 }
 
@@ -163,35 +147,9 @@ li {
 
 .modal-body {
   padding-top: 20px;
-}
-
-p,
-.modal-body {
-  width: 100%;
-  text-align: center;
-  padding-top: 1px;
-  font-size: 27px;
+  font-size: 29px;
   font-family: "Josefin Sans", sans-serif;
-}
-
-.height {
   text-align: center;
-  margin: 0;
-  line-height: 0.2;
-  margin-top: 10px;
-  padding-top: 25px;
-}
-
-.cm-btn,
-.inch-btn {
-  border: none;
-  background-color: transparent;
-  color: black;
-  text-decoration: none;
-  font-size: 18px;
-  float: right;
-  outline: none;
-  line-height: 0.1;
 }
 
 .active:focus {
@@ -212,37 +170,26 @@ p,
   display: none;
 }
 
-.pokemon-weight {
-  margin-top: 55px;
-  text-align: center;
-  line-height: 0.1;
-}
-
+.cm-btn,
+.inch-btn,
 .kg-btn,
 .lbs-btn {
+  position: relative;
   border: none;
   background-color: transparent;
   text-decoration: none;
   font-size: 17px;
-  float: right;
+  left: 10px;
   outline: none;
-  line-height: 0.1;
-}
-
-.pokemon-types {
-  margin-top: 30px;
-  margin-bottom: 5px;
-  line-height: 2;
 }
 
 .pokemon-abilities {
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .pokemon-image {
   width: 50%;
-  justify-self: center;
-  padding: 25px;
+  padding: 15px;
 }
 
 .view-stats,
