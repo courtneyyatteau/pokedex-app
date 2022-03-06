@@ -90,7 +90,6 @@ option {
     font-size: 15px;
     border-radius: 7px;
   }
-
   .sort-form {
     float: right;
     margin: 0px 15px;
@@ -103,12 +102,15 @@ option {
     font-size: 18px;
   }
 
-  text {
+  svg {
     font-size: 22px;
   }
 
-  svg {
-    height: 200px;
+  .container1,
+  .container2,
+  .pokemon-types,
+  .pokemon-abilities {
+    font-size: 24px;
   }
 }
 
@@ -139,6 +141,10 @@ option {
 
 li {
   margin: 20px;
+}
+
+.modal-content {
+  max-height: 700px;
 }
 
 .modal-title {
@@ -190,6 +196,7 @@ li {
 .pokemon-image {
   width: 50%;
   padding: 15px;
+  max-height: 210px;
 }
 
 .view-stats,

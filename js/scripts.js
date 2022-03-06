@@ -469,6 +469,8 @@ let pokemonRepository = (function () {
       container.remove();
     });
 
+    container.classList.add("container");
+
     let container1 = document.createElement("div");
     container1.append(pokemonHeight);
     container1.append(inchBtn);
