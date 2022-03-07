@@ -607,7 +607,7 @@ let pokemonRepository = (function () {
         color = `rgb(112, 56, 248, ${opacity}`;
         image = 'url("/img/icons/dragon.svg")';
         border = "2px solid #4924A1";
-        borderColor = "#638D8D";
+        borderColor = "#4924A1";
         break;
       }
     }
