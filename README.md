@@ -8,4 +8,4 @@ https://pokemon-app-yatteau.netlify.app/
 ESLint single quotes, JavaScript ES6 Version
 
 # API used
-pokeapi
+pokeapi: https://pokeapi.co/
